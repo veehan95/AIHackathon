@@ -1,11 +1,9 @@
 var express = require('express')
 var app = express()
-var cors = require('cors')
+const bodyParser = require('body-parser')
 
-app.use(function (req, res, next) {
-    res.header('Content-Type', 'application/json');
-    next();
-});
+server.use(bodyParser.json({ verify: rawBodySaver }))
+server.use(bodyParser.urlencoded({ extended: true }))
 
 app.get('/api/endpoint1', cors(), (req, res) => {
     res.send(JSON.stringify({hi: "Hello World newest cors done"}));
