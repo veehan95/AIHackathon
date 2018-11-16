@@ -1,11 +1,5 @@
 var express = require('express')
 var app = express()
-var firebase = require('./src/database/firebase/index')
-
-//var ref = firebase.ref('shop/shop/loc')
-//ref.once("value", function(snapshot) {
-//  console.log(snapshot.val());
-//});
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*")
