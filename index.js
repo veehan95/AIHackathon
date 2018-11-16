@@ -17,7 +17,7 @@ app.get('/shop/getShop', (req, res) => {
     res.send('TODO: Shop List from fire base')
 })
 
-app.get('/', (req, res) => {
+app.post('/', (req, res) => {
     console.log(res.params)
 })
 
