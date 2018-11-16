@@ -11,7 +11,9 @@ app.use(function(req, res, next) {
 })
 
 app.get('/shop/getShop', (req, res) => {
-    res.sendFile(`${__dirname}/foo/timo.jpg`)
+    ref.child('shops').once("value", function(snapshot2) {
+      res.send(snapshot.val())
+    });
 })
 
 app.get('/shop/setting/manual', (req, res) => {
@@ -30,7 +32,17 @@ app.get('/user/getLocation', (req, res) => {
 
 app.get('/car/getLocation', (req, res) => {
     ref.child('parking').once("value", function(snapshot) {
-      res.send(snapshot.val())
+      vals = snapshot.val()
+      for (i = 0; i < vals.length; i++)
+        if(vals[i] && "occupy" in vals[i] && vals[i]["occupy"] == "alanisawesome")
+          res.send(vals[i])
+    });
+})
+
+app.get('/car/parking/booking', (req, res) => {
+    ref.child('parking').once("value", function(snapshot) {
+      vals = snapshot.val().filter(val => (val && !("occupy" in val)))
+      res.send(vals)
     });
 })
 
