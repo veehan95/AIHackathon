@@ -1,3 +1,4 @@
+const fs = require('fs')
 var express = require('express')
 var app = express()
 var firebase = require('./src/database/firebase/index')
@@ -10,7 +11,7 @@ app.use(function(req, res, next) {
 })
 
 app.get('/shop/getShop', (req, res) => {
-    res.send('TODO: Shop List from fire base')
+    res.sendFile(`${__dirname}/foo/timo.jpg`)
 })
 
 app.get('/shop/setting/manual', (req, res) => {
@@ -22,7 +23,9 @@ app.get('/shop/setting/auto', (req, res) => {
 })
 
 app.get('/user/getLocation', (req, res) => {
-    console.log('TODO: User Location')
+    ref.child('users').child('alanisawesome').once("value", function(snapshot) {
+      res.send(snapshot.val().location)
+    });
 })
 
 app.get('/car/getLocation', (req, res) => {
@@ -32,20 +35,3 @@ app.get('/car/getLocation', (req, res) => {
 })
 
 app.listen(process.env.PORT || 8000)
-
-/*
-
-const request = require('request')
-const fs = require('fs')
-var FormData = require('form-data')
-
-var form = new FormData()
-form.append("access_key",'aff7b7616a03b7084f29')
-form.append("secret_key",'40f17d27e2f0a0013c750322bc567f9c4e9da990')
-form.append("fileinfo",fs.createReadStream('foo/timo.jpg'))
-
-form.submit('https://fashion.recoqnitics.com/analyze', function(err, res) {
-  console.log(res.resume())
-})
-
-*/
