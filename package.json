@@ -1,0 +1,23 @@
+{
+  "name": "aihackaton",
+  "version": "1.0.0",
+  "description": "AIHackathon",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/veehan95/AIHackathon.git"
+  },
+  "author": "Tan Vee Han",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/veehan95/AIHackathon/issues"
+  },
+  "homepage": "https://github.com/veehan95/AIHackathon#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
