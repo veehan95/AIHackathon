@@ -9,7 +9,7 @@ app.use(bodyParser.json({ verify: (req, res, buf, encoding) => {
 } }))
 app.use(bodyParser.urlencoded({ extended: true }))
 
-app.get('/api/endpoint1', (req, res) => {
+app.get('/', (req, res) => {
     res.send(JSON.stringify({hi: "Hello World newest cors done"}));
 })
 
