@@ -1,5 +1,7 @@
 var express = require('express')
 var app = express()
+var firebase = require('./src/database/firebase/index')
+var ref = firebase.ref()
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*")
@@ -7,11 +9,27 @@ app.use(function(req, res, next) {
   next()
 })
 
-app.all('/:img', (req, res) => {
-  console.log(req.params.img)
-  res.send(200)
+app.get('/shop/getShop', (req, res) => {
+    res.send('TODO: Shop List from fire base')
 })
 
+app.get('/shop/setting/manual', (req, res) => {
+    console.log('TODO: Manual Setting')
+})
+
+app.get('/shop/setting/auto', (req, res) => {
+    console.log('TODO: Auto Setting')
+})
+
+app.get('/user/getLocation', (req, res) => {
+    console.log('TODO: User Location')
+})
+
+app.get('/car/getLocation', (req, res) => {
+    ref.child('parking').once("value", function(snapshot) {
+      res.send(snapshot.val())
+    });
+})
 
 app.listen(process.env.PORT || 8000)
 
