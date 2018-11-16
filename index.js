@@ -7,29 +7,11 @@ app.use(function(req, res, next) {
   next()
 })
 
-app.get('/shop/getShop', (req, res) => {
-    res.send('TODO: Shop List from fire base')
+app.all('/:img', (req, res) => {
+  console.log(req.params.img)
+  res.send(200)
 })
 
-app.post('/', (req, res) => {
-    console.log(res.params)
-})
-
-app.get('/shop/setting/manual', (req, res) => {
-    console.log('TODO: Manual Setting')
-})
-
-app.get('/shop/setting/auto', (req, res) => {
-    console.log('TODO: Auto Setting')
-})
-
-app.get('/user/getLocation', (req, res) => {
-    console.log('TODO: User Location')
-})
-
-app.get('/car/getLocation', (req, res) => {
-    console.log('TODO: Car Location')
-})
 
 app.listen(process.env.PORT || 8000)
 
