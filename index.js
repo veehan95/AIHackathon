@@ -7,7 +7,7 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.get('/api/endpoint1', (req, res) => {
+app.get('/', (req, res) => {
     res.send(JSON.stringify({hi: "Hello World newest"}));
 })
 
