@@ -33,6 +33,14 @@
       .then(res => {
         window.plot(res.faces[0].boundingBox.x, res.faces[0].boundingBox.y, res.faces[0].boundingBox.w, res.faces[0].boundingBox.h);
         $('#result').html(`{age: ${res.faces[0].age}, gender:${res.faces[0].gender.value}, emotions:${JSON.stringify(res.faces[0].emotions)},timestamp:${Date.now()}}`)
+        fetch('http://localhost:8000/shopRelation', {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({age: res.faces[0].age, gender:res.faces[0].gender.value, emotions:res.faces[0].emotions,timestamp:Date.now()})
+        })
       })
   }
 

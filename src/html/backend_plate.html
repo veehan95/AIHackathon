@@ -33,6 +33,7 @@
       .then(res => {
         window.plot(res.licensePlates[0].boundingBox.x, res.licensePlates[0].boundingBox.y, res.licensePlates[0].boundingBox.w, res.licensePlates[0].boundingBox.h);
         $('#result').html(`{license_plate_number: ${res.licensePlates[0].licensePlateNumber}, parking_id:102, lelve:"A1",timestamp:${Date.now()}}`)
+        fetch(`http://localhost:8000/parking/park/${res.licensePlates[0].licensePlateNumber}`)
       })
   }
 
