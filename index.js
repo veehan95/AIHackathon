@@ -31,11 +31,21 @@ app.get('/user/getLocation', (req, res) => {
 })
 
 app.get('/car/getLocation', (req, res) => {
-    ref.child('parking').once("value", function(snapshot) {
-      vals = snapshot.val()
-      for (i = 0; i < vals.length; i++)
-        if(vals[i] && "occupy" in vals[i] && vals[i]["occupy"] == "alanisawesome")
-          res.send(vals[i])
+    ref.child('users').child('alanisawesome').once("value", function(snapshot) {
+      vals = snapshot.val()['car_plates']
+      ref.child('parking').once("value", function(snapshot2) {
+        snapshot2 = snapshot2.val().filter(val => val && 'occupy' in val)
+        console.log(vals)
+        snapshot2 = snapshot2.filter(val => vals.indexOf(val['occupy']) >= 0)
+        res.send(snapshot2)
+      });
+    });
+})
+
+app.get('/car/getCarPlates', (req, res) => {
+    ref.child('users').child('alanisawesome').once("value", function(snapshot) {
+      vals = snapshot.val()['car_plates']
+      res.send(vals)
     });
 })
 
