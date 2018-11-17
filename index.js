@@ -11,13 +11,20 @@ app.use(function(req, res, next) {
 })
 
 app.get('/shop/getShop', (req, res) => {
-    ref.child('shops').once("value", function(snapshot2) {
-      res.send(snapshot.val())
+    ref.child('shops').once("value", function(snapshot) {
+      res.send(snapshot.val().filter(val => val))
+    });
+})
+
+app.get('/shop/getShop/:genre', (req, res) => {
+    ref.child('shops').once("value", function(snapshot) {
+      vals = snapshot.val().filter(val => (val && req.params.genre.indexOf(val.genre)))
+      res.send(vals)
     });
 })
 
 app.get('/shop/setting/manual', (req, res) => {
-    console.log('TODO: Manual Setting')
+    res.sendFile(`${__dirname}/src/html/manual_upload.html`)
 })
 
 app.get('/shop/setting/auto', (req, res) => {
@@ -53,6 +60,12 @@ app.get('/car/parking/booking', (req, res) => {
     ref.child('parking').once("value", function(snapshot) {
       vals = snapshot.val().filter(val => (val && !("occupy" in val)))
       res.send(vals)
+    });
+})
+
+app.get('/shopRelation/', (req, res) => {
+    ref.child('shopRelation').once("value", function(snapshot) {
+      res.send(snapshot.val())
     });
 })
 
