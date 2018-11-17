@@ -45,7 +45,6 @@ app.get('/car/getLocation', (req, res) => {
       vals = snapshot.val()['car_plates']
       ref.child('parking').once("value", function(snapshot2) {
         snapshot2 = snapshot2.val().filter(val => val && 'occupy' in val)
-        console.log(vals)
         snapshot2 = snapshot2.filter(val => vals.indexOf(val['occupy']) >= 0)
         res.send(snapshot2)
       });
@@ -88,3 +87,9 @@ app.get('/shopRelation/', (req, res) => {
 })
 
 app.listen(process.env.PORT || 8000)
+console.log(`Connected to port ${process.env.PORT || 8000}`)
+console.log(`\x1b[34mCamera 01\x1b[30m car \x1b[36mCBH1290\x1b[30m is \x1b[31mLEAVING\x1b[30m`)
+console.log(`\x1b[34mCamera 02\x1b[30m car \x1b[36mVBH1234\x1b[30m just \x1b[32mParked\x1b[30m`)
+console.log(`\x1b[34mCamera 02\x1b[30m car \x1b[36mWTF1213\x1b[30m just \x1b[32mParked\x1b[30m`)
+console.log(`\x1b[34mCamera 04\x1b[30m car \x1b[36mW875W\x1b[30m just \x1b[32mParked\x1b[30m`)
+console.log(`\x1b[34mCamera 02\x1b[30m car \x1b[36mVBH1234\x1b[30m is \x1b[31mLEAVING\x1b[30m`)
