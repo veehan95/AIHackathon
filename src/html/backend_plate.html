@@ -18,19 +18,21 @@
   <input id="imgInp" type="file" name="filename" onchange="">
   <input type="submit" value="Upload Image" name="submit">
 </form>
+<p id="result"></p>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
   function ok(){
     var fd = new FormData(document.forms.namedItem('fileinfo'));
     fd.append('access_key', 'aff7b7616a03b7084f29')
     fd.append('secret_key', '40f17d27e2f0a0013c750322bc567f9c4e9da990')
-    fetch('https://fashion.recoqnitics.com/analyze',{
+    fetch('https://lpr.recoqnitics.com/detect',{
       method: 'POST',
       body: fd
     })
       .then(res => res.json())
       .then(res => {
-        window.plot(res.person.boundingBox.x, res.faces.boundingBox.y, res.faces.boundingBox.w, res.faces.boundingBox.h);
+        window.plot(res.licensePlates[0].boundingBox.x, res.licensePlates[0].boundingBox.y, res.licensePlates[0].boundingBox.w, res.licensePlates[0].boundingBox.h);
+        $('#result').html(`{license_plate_number: ${res.licensePlates[0].licensePlateNumber}, parking_id:102, lelve:"A1",timestamp:${Date.now()}}`)
       })
   }
 

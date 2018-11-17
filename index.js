@@ -27,8 +27,11 @@ app.get('/shop/setting/manual', (req, res) => {
     res.sendFile(`${__dirname}/src/html/manual_upload.html`)
 })
 
-app.get('/shop/setting/auto', (req, res) => {
-    console.log('TODO: Auto Setting')
+app.get('/shop/getShopByType/:type', (req, res) => {
+    ref.child('shops').once("value", function(snapshot) {
+      vals = snapshot.val().filter(val => (val && req.params.type.indexOf(val.type)))
+      res.send(vals)
+    });
 })
 
 app.get('/user/getLocation', (req, res) => {
@@ -56,7 +59,22 @@ app.get('/car/getCarPlates', (req, res) => {
     });
 })
 
+app.get('/shopRelationshipAPI', (req, res) => {
+    res.sendFile(`${__dirname}/src/html/backend_face.html`)
+})
+
+app.get('/carAPI', (req, res) => {
+    res.sendFile(`${__dirname}/src/html/backend_plate.html`)
+})
+
 app.get('/car/parking/booking', (req, res) => {
+    ref.child('parking').once("value", function(snapshot) {
+      vals = snapshot.val().filter(val => (val && !("occupy" in val)))
+      res.send(vals)
+    });
+})
+
+app.get('/car/parking/book', (req, res) => {
     ref.child('parking').once("value", function(snapshot) {
       vals = snapshot.val().filter(val => (val && !("occupy" in val)))
       res.send(vals)
