@@ -18,6 +18,7 @@
   <input id="imgInp" type="file" name="filename" onchange="">
   <input type="submit" value="Upload Image" name="submit">
 </form>
+<p id="result"></p>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
   function ok(){
@@ -30,7 +31,8 @@
     })
       .then(res => res.json())
       .then(res => {
-        window.plot(res.person.boundingBox.x, res.faces.boundingBox.y, res.faces.boundingBox.w, res.faces.boundingBox.h);
+        window.plot(res.person.boundingBox.x, res.person.boundingBox.y, res.person.boundingBox.w, res.person.boundingBox.h);
+        $('#result').html(`{style: [${res.person.styles.map(x => x.styleName)}], garments:[${res.person.garments.map(x => x.typeName)}],timestamp:${Date.now()}}`)
       })
   }
 
